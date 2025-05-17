@@ -8,6 +8,6 @@ public class uber {
 
     @GetMapping({"/uber"})
     public String getData() {
-        return "Please book your UBER TAXI AT at 10% discount";
+        return "Please book your UBER TAXI AT at 50% discount";
     }
 }
