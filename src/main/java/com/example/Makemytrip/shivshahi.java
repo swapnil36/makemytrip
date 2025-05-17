@@ -8,6 +8,6 @@ public class shivshahi {
 
     @GetMapping({"/shivshahi"})
     public String getData() {
-        return "Please book your CAB at 10% discount";
+        return "Please book your Shivshahi Bus at 10% discount";
     }
 }
