@@ -8,6 +8,6 @@ public class Rapido {
 
     @GetMapping({"/Rapido"})
     public String getData() {
-        return "Please book your Rapido at 50% discount";
+        return "Please book your Rapido at 80% discount";
     }
 }
