@@ -2,12 +2,12 @@ package com.example.Makemytrip;
 
 import org.springframework.web.bind.annotation.GetMapping;
 
-public class Rapido {
-    public Rapido() {
+public class uber {
+    public uber() {
     }
 
-    @GetMapping({"/Rapido"})
+    @GetMapping({"/uber"})
     public String getData() {
-        return "Please book your Rapido at 80% discount";
+        return "Please book your UBER TAXI AT at 60% discount";
     }
 }
