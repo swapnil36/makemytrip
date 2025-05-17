@@ -1,0 +1,41 @@
+pipeline {
+    agent any
+
+    tools {
+        maven 'mvn_3.9.9' // Must match your Jenkins tool config
+
+    }
+
+    environment {
+        PROJECT_NAME = 'My Maven Project'
+    }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                git url: 'https://github.com/your-username/your-repo.git', branch: 'dev'
+            }
+        }
+
+        stage('Build & Test') {
+            steps {
+                sh 'mvn clean verify' // Combines build and test
+            }
+        }
+
+        stage('Archive Artifacts') {
+            steps {
+                archiveArtifacts artifacts: 'target/*.jar', fingerprint: true
+            }
+        }
+    }
+
+    post {
+        success {
+            echo '✅ Build completed successfully.'
+        }
+        failure {
+            echo '❌ Build failed!'
+        }
+    }
+}
