@@ -1,31 +1,37 @@
 pipeline {
+
     agent any
 
-    tools {
-        maven 'mvn_3.9.9' // Must match your Jenkins tool config
-
+    options {
+        buildDiscarder(logRotator(numToKeepStr: '3', artifactNumToKeepStr: '3'))
     }
 
-    environment {
-        PROJECT_NAME = 'My Maven Project'
+    tools {
+        maven 'mvn_3.9.9'  // Make sure this Maven tool is defined in Jenkins global tools
     }
 
     stages {
-        stage('Checkout') {
+        stage('Code Compilation') {
             steps {
-                git url: 'https://github.com/your-username/your-repo.git', branch: 'dev'
+                echo 'Starting Code Compilation...'
+                sh 'mvn clean compile'
+                echo 'Code Compilation Completed Successfully!'
             }
         }
 
-        stage('Build & Test') {
+        stage('Code QA Execution') {
             steps {
-                sh 'mvn clean verify' // Combines build and test
+                echo 'Running JUnit Test Cases...'
+                sh 'mvn clean test'
+                echo 'JUnit Test Cases Completed Successfully!'
             }
         }
 
-        stage('Archive Artifacts') {
+        stage('Code Package') {
             steps {
-                archiveArtifacts artifacts: 'target/*.jar', fingerprint: true
+                echo 'Creating WAR Artifact...'
+                sh 'mvn clean package'
+                echo 'WAR Artifact Created Successfully!'
             }
         }
     }
@@ -35,7 +41,7 @@ pipeline {
             echo '✅ Build completed successfully.'
         }
         failure {
-            echo '❌ Build failed!'
+            echo '❌ Build failed.'
         }
     }
 }
