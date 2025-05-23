@@ -8,6 +8,6 @@ public class MSRTC {
 
     @GetMapping({"/MSRTC"})
     public String getData() {
-        return "Please book your MSRTC BUS AT at 50% discount";
+        return "Please book your MSRTC BUS AT at 60% discount";
     }
 }
