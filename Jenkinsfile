@@ -6,9 +6,7 @@ pipeline {
         buildDiscarder(logRotator(numToKeepStr: '3', artifactNumToKeepStr: '3'))
     }
 
-    tools {
-        maven '/opt/apache-maven-3.9.9'  // Make sure this Maven tool is defined in Jenkins global tools
-    }
+  
 
     stages {
         stage('Code Compilation') {
