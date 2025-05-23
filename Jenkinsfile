@@ -1,18 +1,15 @@
 pipeline {
-
     agent any
 
     options {
         buildDiscarder(logRotator(numToKeepStr: '3', artifactNumToKeepStr: '3'))
     }
 
- 
-
     stages {
         stage('Code Compilation') {
             steps {
                 echo 'Starting Code Compilation...'
-                sh 'mvn clean compile'
+                sh '/opt/apache-maven-3.9.9/bin/mvn clean compile'
                 echo 'Code Compilation Completed Successfully!'
             }
         }
@@ -20,7 +17,7 @@ pipeline {
         stage('Code QA Execution') {
             steps {
                 echo 'Running JUnit Test Cases...'
-                sh 'mvn clean test'
+                sh '/opt/apache-maven-3.9.9/bin/mvn test'
                 echo 'JUnit Test Cases Completed Successfully!'
             }
         }
@@ -28,7 +25,7 @@ pipeline {
         stage('Code Package') {
             steps {
                 echo 'Creating WAR Artifact...'
-                sh 'mvn clean package'
+                sh '/opt/apache-maven-3.9.9/bin/mvn package'
                 echo 'WAR Artifact Created Successfully!'
             }
         }
@@ -43,3 +40,4 @@ pipeline {
         }
     }
 }
+
